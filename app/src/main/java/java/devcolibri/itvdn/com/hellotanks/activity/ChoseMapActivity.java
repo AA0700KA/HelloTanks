@@ -18,6 +18,7 @@ import java.devcolibri.itvdn.com.hellotanks.pojo.AbstractObjects;
 import java.devcolibri.itvdn.com.hellotanks.pojo.Brick;
 import java.devcolibri.itvdn.com.hellotanks.pojo.GameMap;
 import java.devcolibri.itvdn.com.hellotanks.pojo.Shtab;
+import java.devcolibri.itvdn.com.hellotanks.pojo.StopableObject;
 import java.devcolibri.itvdn.com.hellotanks.util.BattleFIeld;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -51,7 +52,6 @@ public class ChoseMapActivity extends Activity implements AdapterView.OnItemClic
         GameMap map = new GameMap();
         map.setName("Standart");
 
-        List<AbstractObjects> list = new CopyOnWriteArrayList<>();
         DisplayMetrics metrics = getResources().getDisplayMetrics();
 
 
@@ -61,22 +61,28 @@ public class ChoseMapActivity extends Activity implements AdapterView.OnItemClic
         Log.d("metrics", String.valueOf(height));
         int quadrantX = width/40;
         int quadrantY = height/40;
+        boolean notShtab = false;
+        StopableObject[][] stopableObjects = new StopableObject[quadrantY][quadrantX];
 
         for (int i = 0; i < quadrantY; i++) {
             for (int j = 0; j < quadrantX; j++) {
                 if (j%3 == 0) {
-                    list.add(new Brick(metrics,i*40, j*40,this));
+                   stopableObjects[i][j] = new Brick(metrics,i*40, j*40,this);
                 }
+
+                if (i*5 > 100 && j*5 > 100 && !notShtab) {
+                    Shtab shtab = new Shtab(this, metrics);
+                    shtab.setX(i*40);
+                    shtab.setY(j*40);
+                    stopableObjects[i][j] =  shtab;
+                    notShtab = true;
+                }
+
             }
         }
 
-        Shtab shtab = new Shtab(this, metrics);
-        shtab.setX(500);
-        shtab.setY(500);
+        map.setStopableObjects(stopableObjects);
 
-        list.add(shtab);
-
-        map.setObjects(list);
         BattleFIeld.addMap(map);
     }
 
