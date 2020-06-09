@@ -18,7 +18,7 @@ public abstract class AbstractObjects implements Drawable, Destroyable {
 
     public abstract void draw(Canvas canvas);
 
-   public abstract void update(List<AbstractObjects> list);
+   public abstract void update(GameMap map);
 
     public AbstractObjects(Context context, DisplayMetrics metrics) {
         this.context = context;

@@ -32,7 +32,7 @@ public class Bullet extends MovableObject {
     }
 
     @Override
-    public void update(List<AbstractObjects> list) {
+    public void update(GameMap map) {
         if (tank.fire()) {
             if (tank.getDirection() == 1 && getX() == -100 && getY() == -100) {
                 Log.d("tankCord", "X = " + (tank.getX()));
@@ -55,13 +55,13 @@ public class Bullet extends MovableObject {
             }
 
             if (direction == 1) {
-                setY(getY() - 24);
+                setY(getY() - 5);
             } else if (direction == 2) {
-                setY(getY() + 24);
+                setY(getY() + 5);
             } else if (direction == 3) {
-                setX(getX() - 24);
+                setX(getX() - 5);
             } else if (direction == 4) {
-                setX(getX() + 24);
+                setX(getX() + 5);
             }
 
             if (isDestroyed()) {

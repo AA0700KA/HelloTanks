@@ -59,10 +59,10 @@ public abstract class MovableObject extends AbstractObjects {
 
                     tank.setFire(true);
                 }else if (getY() > object.getY()) {
-                    tank.move(1, 5);
+                    tank.move(1, 1);
                     lastDirection = 1;
                 } else if (getY() < object.getY()) {
-                    tank.move(2, 5);
+                    tank.move(2, 1);
                     lastDirection = 2;
                 }
 
@@ -79,10 +79,10 @@ public abstract class MovableObject extends AbstractObjects {
 
                     tank.setFire(true);
                 } else if (getX() > object.getX()) {
-                    tank.move(3,5);
+                    tank.move(3,1);
                     lastDirection = 3;
                 } else if (getX() < object.getX()) {
-                    tank.move(4,5);
+                    tank.move(4,1);
                     lastDirection = 4;
                 }
 

@@ -7,6 +7,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 
+import java.devcolibri.itvdn.com.hellotanks.pojo.MovableObject;
 import java.devcolibri.itvdn.com.hellotanks.thread.GameThread;
 import java.devcolibri.itvdn.com.hellotanks.pojo.AbstractObjects;
 import java.devcolibri.itvdn.com.hellotanks.pojo.AttackTank;
@@ -17,6 +18,7 @@ import java.devcolibri.itvdn.com.hellotanks.pojo.TouchPad;
 import java.devcolibri.itvdn.com.hellotanks.util.BattleFIeld;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -27,7 +29,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private List<TouchPad> touchPads;
 
 
-    private List<AbstractObjects> list;
+    private List<MovableObject> list;
 
     public GameView(Context context, int indexMap) {
         super(context);
@@ -80,7 +82,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 //        rock.setX(600);
 //        rock.setY(600);
         GameMap map = BattleFIeld.getMaps().get(indexMap);
-        list = map.getObjects();
+        list = new CopyOnWriteArrayList<>();
 //        List<AbstractObjects> list= new CopyOnWriteArrayList<>();
 //
 //       // list.add(brick);
@@ -116,12 +118,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
         list.add(down);
         list.add(up);
         list.add(fire);
-    //    list.add(shtab);
+
+        map.setObjects(list);
 
 
 
 
-        thread = new GameThread(getHolder(), context,list);
+        thread = new GameThread(getHolder(), context,map);
         thread.start();
     }
 

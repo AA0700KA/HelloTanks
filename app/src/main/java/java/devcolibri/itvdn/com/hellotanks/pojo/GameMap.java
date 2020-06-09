@@ -7,7 +7,16 @@ import java.util.List;
 public class GameMap {
 
     private String name;
-    private List<AbstractObjects> objects;
+    private List<MovableObject> objects;
+    private StopableObject[][] stopableObjects;
+
+    public StopableObject[][] getStopableObjects() {
+        return stopableObjects;
+    }
+
+    public void setStopableObjects(StopableObject[][] stopableObjects) {
+        this.stopableObjects = stopableObjects;
+    }
 
     public String getName() {
         return name;
@@ -17,11 +26,11 @@ public class GameMap {
         this.name = name;
     }
 
-    public List<AbstractObjects> getObjects() {
+    public List<MovableObject> getObjects() {
         return objects;
     }
 
-    public void setObjects(List<AbstractObjects> objects) {
+    public void setObjects(List<MovableObject> objects) {
         this.objects = objects;
     }
 

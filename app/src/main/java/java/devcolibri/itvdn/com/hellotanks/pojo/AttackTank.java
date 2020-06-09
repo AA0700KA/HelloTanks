@@ -20,14 +20,15 @@ public class AttackTank extends Tank {
 
 
     @Override
-    public void update(List<AbstractObjects> list) {
+    public void update(GameMap map) {
+        List<MovableObject> list = map.getObjects();
          for (AbstractObjects object : list) {
              gettingFire(object, DefenderTank.class);
              if (!isPlay()) {
                  attack(this, object, Shtab.class);
              }
          }
-         getBullet().update(list);
+         getBullet().update(map);
 
     }
 

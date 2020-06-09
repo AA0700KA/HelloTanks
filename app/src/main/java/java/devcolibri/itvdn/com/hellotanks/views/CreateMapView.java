@@ -3,7 +3,6 @@ package java.devcolibri.itvdn.com.hellotanks.views;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,11 +15,9 @@ import android.widget.Toast;
 import java.devcolibri.itvdn.com.hellotanks.pojo.AbstractObjects;
 import java.devcolibri.itvdn.com.hellotanks.pojo.Brick;
 import java.devcolibri.itvdn.com.hellotanks.pojo.GameMap;
-import java.devcolibri.itvdn.com.hellotanks.pojo.Ground;
 import java.devcolibri.itvdn.com.hellotanks.pojo.Rock;
 import java.devcolibri.itvdn.com.hellotanks.pojo.Shtab;
 import java.devcolibri.itvdn.com.hellotanks.util.BattleFIeld;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -63,15 +60,15 @@ public class CreateMapView extends View {
     }
 
     public void createNewMap(Activity activity, String name) {
-        if (!haveNotShtab) {
-            GameMap map = new GameMap();
-            map.setName(name);
-            map.setObjects(list);
-            BattleFIeld.addMap(map);
-            activity.finish();
-        } else {
-            Toast.makeText(getContext(), "Must have only one shtab", Toast.LENGTH_SHORT).show();
-        }
+//        if (!haveNotShtab) {
+//            GameMap map = new GameMap();
+//            map.setName(name);
+//            map.setObjects(list);
+//            BattleFIeld.addMap(map);
+//            activity.finish();
+//        } else {
+//            Toast.makeText(getContext(), "Must have only one shtab", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     @Override

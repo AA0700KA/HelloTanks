@@ -8,7 +8,7 @@ import android.util.DisplayMetrics;
 
 import java.util.List;
 
-public class TouchPad extends AbstractObjects {
+public class TouchPad extends MovableObject {
 
     private String direction;
     private int directionValue;
@@ -34,7 +34,7 @@ public class TouchPad extends AbstractObjects {
     }
 
     @Override
-    public void update(List<AbstractObjects> list) {
+    public void update(GameMap map) {
 
     }
 

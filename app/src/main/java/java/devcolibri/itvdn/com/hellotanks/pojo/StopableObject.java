@@ -20,7 +20,8 @@ public abstract class StopableObject extends AbstractObjects {
     }
 
     @Override
-    public void update(List<AbstractObjects> list) {
+    public void update(GameMap map) {
+        List<MovableObject> list = map.getObjects();
         for (AbstractObjects object : list) {
             gettingFire(object);
         }

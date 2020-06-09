@@ -12,12 +12,7 @@ import java.util.List;
 
 public class Rock extends StopableObject {
 
-    @Override
-    public void update(List<AbstractObjects> list) {
-        for (AbstractObjects object : list) {
-            gettingFire(object);
-        }
-    }
+
 
     public Rock(Context context, DisplayMetrics metrics) {
         super(context, metrics);
