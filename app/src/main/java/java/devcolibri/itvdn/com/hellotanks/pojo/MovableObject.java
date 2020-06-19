@@ -38,9 +38,11 @@ public abstract class MovableObject extends AbstractObjects {
         }
     }
 
-    public void attack(Tank tank, AbstractObjects object, Class attackedObjectClass) {
+    public void attack(Tank tank, AbstractObjects object, Class attackedObjectClass, StopableObject[][] fieldsObjects) {
         tank.setDontCanMove(false);
         if (object.getClass() == attackedObjectClass && !object.isDestroyed()) {
+            int tankXQuadrant = (int) (getX()/40);
+            int tankYQuadrant = (int) (getY()/40);
             int subY = (int) Math.abs(getY() - object.getY());
             int subX = (int) Math.abs(getX() - object.getX());
             Log.d("attack", "attack: " + attackedObjectClass.getSimpleName() + " Y tank = " + ((int) getY()/40) + " Y object = " + ((int) object.getY()/40));
@@ -59,10 +61,24 @@ public abstract class MovableObject extends AbstractObjects {
 
                     tank.setFire(true);
                 }else if (getY() > object.getY()) {
-                    tank.move(1, 1);
+                    if (((fieldsObjects[tankYQuadrant - 1][tankXQuadrant] != null
+                            && fieldsObjects[tankYQuadrant - 1][tankXQuadrant].isDestroyed())
+                            || fieldsObjects[tankYQuadrant - 1][tankXQuadrant] == null)) {
+                        tank.move(1, 1);
+                    } else {
+                        tank.setDirection(1);
+                        tank.setFire(true);
+                    }
                     lastDirection = 1;
                 } else if (getY() < object.getY()) {
-                    tank.move(2, 1);
+                    if (((fieldsObjects[tankYQuadrant + 1][tankXQuadrant] != null
+                            && fieldsObjects[tankYQuadrant + 1][tankXQuadrant].isDestroyed())
+                            || fieldsObjects[tankYQuadrant + 1][tankXQuadrant] == null)) {
+                        tank.move(2, 1);
+                    } else {
+                        tank.setDirection(2);
+                        tank.setFire(true);
+                    }
                     lastDirection = 2;
                 }
 
@@ -79,10 +95,24 @@ public abstract class MovableObject extends AbstractObjects {
 
                     tank.setFire(true);
                 } else if (getX() > object.getX()) {
-                    tank.move(3,1);
+                    if (((fieldsObjects[tankYQuadrant][tankXQuadrant - 1] != null
+                            && fieldsObjects[tankYQuadrant][tankXQuadrant - 1].isDestroyed())
+                            || fieldsObjects[tankYQuadrant ][tankXQuadrant - 1] == null)) {
+                        tank.move(3, 1);
+                    } else {
+                        tank.setDirection(3);
+                        tank.setFire(true);
+                    }
                     lastDirection = 3;
                 } else if (getX() < object.getX()) {
-                    tank.move(4,1);
+                    if (((fieldsObjects[tankYQuadrant][tankXQuadrant + 1] != null
+                            && fieldsObjects[tankYQuadrant][tankXQuadrant + 1].isDestroyed())
+                            || fieldsObjects[tankYQuadrant][tankXQuadrant + 1] == null)) {
+                        tank.move(4, 1);
+                    } else {
+                        tank.setDirection(4);
+                        tank.setFire(true);
+                    }
                     lastDirection = 4;
                 }
 

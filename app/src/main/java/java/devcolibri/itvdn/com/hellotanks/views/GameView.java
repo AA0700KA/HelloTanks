@@ -8,6 +8,7 @@ import android.view.SurfaceView;
 
 
 import java.devcolibri.itvdn.com.hellotanks.pojo.MovableObject;
+import java.devcolibri.itvdn.com.hellotanks.pojo.StopableObject;
 import java.devcolibri.itvdn.com.hellotanks.thread.GameThread;
 import java.devcolibri.itvdn.com.hellotanks.pojo.AbstractObjects;
 import java.devcolibri.itvdn.com.hellotanks.pojo.AttackTank;
@@ -27,6 +28,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private int indexMap;
     private Tank playTank;
     private List<TouchPad> touchPads;
+    private GameMap map;
 
 
     private List<MovableObject> list;
@@ -81,7 +83,7 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 //        rock.setBitmap(bitmapr);
 //        rock.setX(600);
 //        rock.setY(600);
-        GameMap map = BattleFIeld.getMaps().get(indexMap);
+        map = BattleFIeld.getMaps().get(indexMap);
         list = new CopyOnWriteArrayList<>();
 //        List<AbstractObjects> list= new CopyOnWriteArrayList<>();
 //
@@ -160,12 +162,33 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
            if (x >= pad.getX() && x <= pad.getX() + 200 && y >= pad.getY() && y <= pad.getY() + 200) {
                if (pad.getDirection().equals("Fire")) {
                    playTank.setFire(true);
-               } else {
+               } else if (canTankMove(pad.getDirectionValue())){
                    playTank.move(pad.getDirectionValue(), 5);
                }
            }
         }
         return true;
+    }
+
+    private boolean canTankMove(int direction) {
+        int playTankX = (int) (playTank.getX()/40);
+        int playTankY = (int) (playTank.getY()/40);
+        StopableObject[][] fieldObjects = map.getStopableObjects();
+
+        if (direction == 1 && checkIsLeavingObject(fieldObjects, playTankY - 1, playTankX)
+                || direction == 2 && checkIsLeavingObject(fieldObjects, playTankY + 1, playTankX)
+                  || direction == 3 && checkIsLeavingObject(fieldObjects, playTankY, playTankX - 1)
+                    || direction == 4 && checkIsLeavingObject(fieldObjects, playTankY, playTankX + 1)) {
+            return true;
+        }
+
+        return false;
+
+    }
+
+    private boolean checkIsLeavingObject(StopableObject[][] fieldsObject, int y, int x) {
+        return fieldsObject[y][x] == null
+                || fieldsObject[y][x] != null && fieldsObject[y][x].isDestroyed();
     }
 
 }

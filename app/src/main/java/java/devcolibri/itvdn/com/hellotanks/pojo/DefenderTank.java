@@ -21,10 +21,11 @@ public class DefenderTank extends Tank {
     @Override
     public void update(GameMap map) {
         List<MovableObject> list = map.getObjects();
+        StopableObject[][] stopableObjects = map.getStopableObjects();
         for (AbstractObjects object : list) {
             gettingFire(object, AttackTank.class);
             if (!isPlay()) {
-                attack(this, object, AttackTank.class);
+                attack(this, object, AttackTank.class, stopableObjects);
             }
         }
 
