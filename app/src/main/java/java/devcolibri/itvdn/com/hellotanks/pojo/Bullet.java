@@ -62,7 +62,6 @@ public class Bullet extends MovableObject {
                 setX(getX() - 5);
             } else if (direction == 4) {
                 setX(getX() + 5);
-                
             }
 
             if (isDestroyed()) {
