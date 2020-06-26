@@ -40,7 +40,7 @@ public class CreateMapActivity extends Activity {
 //
 //            for (int j = 0; j < width; j++) {
 //                ImageView image = new ImageView(this);
-//                image.setImageResource(R.drawable.golden_tank);
+//                image.setImageResource(R.drawable.golden_tank_up);
 //                columnLayout.addView(image, 40, 40);
 //            }
 //

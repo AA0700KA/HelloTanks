@@ -61,6 +61,8 @@ public class ChoseMapActivity extends Activity implements AdapterView.OnItemClic
         Log.d("metrics", String.valueOf(height));
         int quadrantX = width/40;
         int quadrantY = height/40;
+        map.setHeight(quadrantY);
+        map.setWidth(quadrantX);
         boolean notShtab = false;
         StopableObject[][] stopableObjects = new StopableObject[quadrantY][quadrantX];
 

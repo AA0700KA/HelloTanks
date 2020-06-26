@@ -43,17 +43,22 @@ public abstract class Tank extends MovableObject {
         return direction;
     }
 
+
+
     public void setDirection(int direction) {
         this.direction = direction;
-//        if (direction == 1) {
-//            changeBitmap(R.drawable.golden_tank_up);
-//        } else if (direction == 2) {
-//            changeBitmap(R.drawable.golden_tank_down);
-//        } else if (direction == 3) {
-//            changeBitmap(R.drawable.golden_tank_left);
-//        } else if (direction == 4) {
-//            changeBitmap(R.drawable.golden_tank_right);
-//        }
+    }
+
+    protected void initBitmap(int direction, int[] idDrawable) {
+        if (direction == 1) {
+            changeBitmap(idDrawable[0]);
+        } else if (direction == 2) {
+            changeBitmap(idDrawable[1]);
+        } else if (direction == 3) {
+            changeBitmap(idDrawable[2]);
+        } else if (direction == 4) {
+            changeBitmap(idDrawable[3]);
+        }
     }
 
     private void changeBitmap(int idDrawable) {
@@ -63,7 +68,7 @@ public abstract class Tank extends MovableObject {
     }
 
     public void move(int direction, int pixels) {
-        this.direction = direction;
+        setDirection(direction);
 
         if (dontCanMove) {
             return;

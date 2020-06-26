@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import java.devcolibri.itvdn.com.hellotanks.R;
 import java.util.List;
@@ -13,9 +12,17 @@ public class DefenderTank extends Tank {
 
     public DefenderTank(DisplayMetrics metrics, Context context) {
         super(context, metrics);
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_tank);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.green_tank_up);
         Bitmap bitmap1 = Bitmap.createScaledBitmap(bitmap, 40,40, true);
         setBitmap(bitmap1);
+    }
+
+
+    @Override
+    public void setDirection(int direction) {
+        super.setDirection(direction);
+        initBitmap(direction,
+                new int[] {R.drawable.green_tank_up, R.drawable.green_tank_down, R.drawable.green_tank_left, R.drawable.green_tank_right});
     }
 
     @Override

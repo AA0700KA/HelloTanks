@@ -160,6 +160,9 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
         for (TouchPad pad : touchPads) {
            if (x >= pad.getX() && x <= pad.getX() + 200 && y >= pad.getY() && y <= pad.getY() + 200) {
+               if (!pad.getDirection().equals("Fire")) {
+                   playTank.setDirection(pad.getDirectionValue());
+               }
                if (pad.getDirection().equals("Fire")) {
                    playTank.setFire(true);
                } else if (canTankMove(pad.getDirectionValue())){
@@ -173,12 +176,11 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
     private boolean canTankMove(int direction) {
         int playTankX = (int) (playTank.getX()/40);
         int playTankY = (int) (playTank.getY()/40);
-        StopableObject[][] fieldObjects = map.getStopableObjects();
 
-        if (direction == 1 && checkIsLeavingObject(fieldObjects, playTankY - 1, playTankX)
-                || direction == 2 && checkIsLeavingObject(fieldObjects, playTankY + 1, playTankX)
-                  || direction == 3 && checkIsLeavingObject(fieldObjects, playTankY, playTankX - 1)
-                    || direction == 4 && checkIsLeavingObject(fieldObjects, playTankY, playTankX + 1)) {
+        if (direction == 1 && checkIsLeavingObject(map, playTankY - 1, playTankX)
+                || direction == 2 && checkIsLeavingObject(map, playTankY + 1, playTankX)
+                  || direction == 3 && checkIsLeavingObject(map, playTankY, playTankX - 1)
+                    || direction == 4 && checkIsLeavingObject(map, playTankY, playTankX + 1)) {
             return true;
         }
 
@@ -186,9 +188,13 @@ public class GameView extends SurfaceView implements SurfaceHolder.Callback {
 
     }
 
-    private boolean checkIsLeavingObject(StopableObject[][] fieldsObject, int y, int x) {
-        return fieldsObject[y][x] == null
-                || fieldsObject[y][x] != null && fieldsObject[y][x].isDestroyed();
+    private boolean checkIsLeavingObject(GameMap map, int y, int x) {
+        StopableObject[][] fieldObject = map.getStopableObjects();
+        if (y >= 0 && y < map.getHeight() && x >= 0 && x < map.getWidth()) {
+            return fieldObject[y][x] == null
+                    || fieldObject[y][x] != null && fieldObject[y][x].isDestroyed();
+        }
+        return false;
     }
 
 }

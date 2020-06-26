@@ -73,7 +73,7 @@ public class GameThread extends Thread {
 
                     canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), backgroundPaint);
 
-                    //                   Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.golden_tank);
+                    //                   Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.golden_tank_up);
 
                     //                   canvas.drawBitmap(bitmap, x, y, paint);
                     List<MovableObject> list = map.getObjects();
